@@ -16,7 +16,7 @@ extension OSLog {
     static let fault = OSLog(subsystem: subsystem, category: "Fault")
 }
 
-struct Log {
+public struct Log {
     /// Log를 보여주는 코드적인 레벨 none을 설정하면 다 안보임
     /// 설정한 레벨 까지 보임 : info 설정시 (info , custom , debug 까지 보임)
     /// all을 설정하면 다 보임.
@@ -121,31 +121,31 @@ struct Log {
 }
 
 extension Log {
-    static func debug(_ message: Any, _ arguments: Any...) {
+    public static func debug(_ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.debug) else { return }
         log(message, arguments, level: .debug)
     }
 
-    static func info(_ message: Any, _ arguments: Any...) {
+    public static func info(_ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.info) else { return }
         log(message, arguments, level: .info)
     }
 
-    static func network(_ message: Any, _ arguments: Any...) {
+    public static func network(_ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.network) else { return }
         log(message, arguments, level: .network)
     }
 
-    static func error(_ message: Any, _ arguments: Any...) {
+    public static func error(_ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.error) else { return }
         log(message, arguments, level: .error)
     }
-    static func fault(_ message: Any, _ arguments: Any...) {
+    public static func fault(_ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.fault) else { return }
         log(message, arguments,level: .fault)
     }
 
-    static func custom(category: String, _ message: Any, _ arguments: Any...) {
+    public static func custom(category: String, _ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.custom) else { return }
         log(message, arguments, level: .custom(categoryName: category))
     }
