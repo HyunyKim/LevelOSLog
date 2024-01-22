@@ -1,10 +1,9 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+
 import Foundation
 import OSLog
 import os.log
 /**
- 기본 All
+로그를 선택적으로 보여 주기 위해서 Level 을 적용해서 어떤 Level만 보일지를 설정해 줄 수 있습니다.
  **/
 
 extension OSLog {
@@ -17,9 +16,7 @@ extension OSLog {
 }
 
 public struct Log {
-    /// Log를 보여주는 코드적인 레벨 none을 설정하면 다 안보임
-    /// 설정한 레벨 까지 보임 : info 설정시 (info , custom , debug 까지 보임)
-    /// all을 설정하면 다 보임.
+    /// 설정한 레벨 만 보임 : logLevel에 설정한 Level만 보임
     enum LevelValue : Int{
         case debug
         case custom
@@ -29,31 +26,33 @@ public struct Log {
         case fault
     }
     /// Log를 보여줄 코드적인 레벨 기본값을 다 보여주는 All로 잡음
-    static private let logLevel: [LevelValue] = [ .network, .debug, .custom, .info, .error, .fault]
-
+    static private var logLevel: [LevelValue] = [ .network, .debug, .custom, .info, .error, .fault]
+    static func changeLogLevel(levels: [LevelValue]) {
+        Log.logLevel = levels
+    }
     enum Level {
         case debug
         case info
         case network
         case error
         case fault
-        case custom(categoryName: String)
+        case custom(category: String)
         
 
         fileprivate var category: String {
             switch self {
             case .debug:
-                return "Debug"
+                return "[🟡Debug]"
             case .info:
-                return "Info"
+                return "[🟠Info]"
             case .network:
-                return "Network"
+                return "[🔵Network]"
             case .error:
-                return "Error"
+                return "[🔴Error]"
             case .fault:
-                return "Fault"
-            case .custom(let categoryName):
-                return categoryName
+                return "[🔴Fault]"
+            case .custom(let category):
+                return "⚪️\(category)"
             }
         }
 
@@ -147,7 +146,7 @@ extension Log {
 
     public static func custom(category: String, _ message: Any, _ arguments: Any...) {
         guard logLevel.contains(.custom) else { return }
-        log(message, arguments, level: .custom(categoryName: category))
+        log(message, arguments, level: .custom(category: category))
     }
     
 }
