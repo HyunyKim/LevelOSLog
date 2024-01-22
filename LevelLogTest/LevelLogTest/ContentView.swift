@@ -18,7 +18,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
-            
+            LLog.shared.levelValue = []
         }
     }
 }

@@ -22,14 +22,8 @@ extension OSLog {
 ///   시스템의 설정 뿐아니라 로그의 레벨을 직접 적용하는게 목적이여서 진행해 봤습니다.
 ///   기본 값을 다 설정하도록 만들겠습니다.
 open class LLog {
-    public static let `shared` = LLog()
-    var logLevel: [Log.LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
-}
-
-
-public struct Log {
     /// 설정한 레벨 만 보임 : logLevel에 설정한 Level만 보임
-    enum LevelValue : Int{
+    public enum LevelValue : Int{
         case debug
         case custom
         case info
@@ -37,6 +31,17 @@ public struct Log {
         case error
         case fault
     }
+    
+    public static let `shared` = LLog()
+    public func changeLevel(levels: [LevelValue]) {
+        logLevel = levels
+    }
+    var logLevel: [LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
+}
+
+
+public struct Log {
+   
     /// Log를 보여줄 코드적인 레벨 기본값을 다 보여주는 All로 잡음
 
     enum Level {
