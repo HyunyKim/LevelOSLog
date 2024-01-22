@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "leveloslog",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HyunyKim/LevelOSLog.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2f0bfcc7c2519ac2af803b80f5fe8fadd90757f7"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -22,7 +22,7 @@ extension OSLog {
 ///   시스템의 설정 뿐아니라 로그의 레벨을 직접 적용하는게 목적이여서 진행해 봤습니다.
 ///   기본 값을 다 설정하도록 만들겠습니다.
 open class LLog {
-    public static let shared = LLog()
+    public static let `shared` = LLog()
     var logLevel: [Log.LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
 }
 
