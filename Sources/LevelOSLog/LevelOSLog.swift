@@ -36,7 +36,7 @@ open class LLog {
     public func changeLevel(levels: [LevelValue]) {
         logLevel = levels
     }
-    var logLevel: [LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
+    fileprivate var logLevel: [LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
 }
 
 
