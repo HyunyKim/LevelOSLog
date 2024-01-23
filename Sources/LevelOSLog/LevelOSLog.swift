@@ -25,12 +25,17 @@ open class LLog {
 
     public static let `shared` = LLog()
     /// Log를 보여줄 코드적인 레벨 기본값을 다 보여주는 All로 잡음
-    internal var logLevel: [Log.Level] = [.debug,.info,.network,.error,.fault]
+    fileprivate var logLevel: [Log.Level] = [.debug,.info,.network,.error,.fault]
+    
+    /// 개발자 로그 Filter를 위한 설정.
+    /// - Parameter levels: Log.level을 Array로 전달한다 포함된 로그 카테고리만 표시 된다. 
+    public func changeLevel(levels: [Log.Level]) {
+        logLevel = levels
+    }
 }
 
-
 public struct Log {
-    enum Level {
+    public enum Level {
         case debug
         case info
         case network
