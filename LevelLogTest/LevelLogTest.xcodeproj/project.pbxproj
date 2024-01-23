@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53F245092B5F751200071D91 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F245082B5F751200071D91 /* MyView.swift */; };
+		53F2450B2B5F759500071D91 /* PlayerVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F2450A2B5F759500071D91 /* PlayerVIew.swift */; };
 		53FA7C392B5E292C00BDBECE /* LevelLogTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA7C382B5E292C00BDBECE /* LevelLogTestApp.swift */; };
 		53FA7C3B2B5E292C00BDBECE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA7C3A2B5E292C00BDBECE /* ContentView.swift */; };
 		53FA7C3D2B5E292D00BDBECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53FA7C3C2B5E292D00BDBECE /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53F245082B5F751200071D91 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
+		53F2450A2B5F759500071D91 /* PlayerVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVIew.swift; sourceTree = "<group>"; };
 		53FA7C352B5E292C00BDBECE /* LevelLogTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelLogTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53FA7C382B5E292C00BDBECE /* LevelLogTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLogTestApp.swift; sourceTree = "<group>"; };
 		53FA7C3A2B5E292C00BDBECE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 		53FA7C372B5E292C00BDBECE /* LevelLogTest */ = {
 			isa = PBXGroup;
 			children = (
+				53F2450A2B5F759500071D91 /* PlayerVIew.swift */,
+				53F245082B5F751200071D91 /* MyView.swift */,
 				53FA7C382B5E292C00BDBECE /* LevelLogTestApp.swift */,
 				53FA7C3A2B5E292C00BDBECE /* ContentView.swift */,
 				53FA7C3C2B5E292D00BDBECE /* Assets.xcassets */,
@@ -145,8 +151,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F245092B5F751200071D91 /* MyView.swift in Sources */,
 				53FA7C3B2B5E292C00BDBECE /* ContentView.swift in Sources */,
 				53FA7C392B5E292C00BDBECE /* LevelLogTestApp.swift in Sources */,
+				53F2450B2B5F759500071D91 /* PlayerVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
