@@ -11,14 +11,11 @@ import LevelOSLog
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            MyView()
         }
         .padding()
         .onAppear() {
-            
+            LLog.shared.changeLevel(levels: [.debug,.network,.error])
         }
     }
 }
