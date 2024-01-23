@@ -23,20 +23,12 @@ extension OSLog {
 ///   기본 값을 다 설정하도록 만들겠습니다.
 open class LLog {
     public static let `shared` = LLog()
-    var logLevel: [Log.LevelValue] = [.debug,.custom,.info,.network,.error,.fault]
+    var logLevel: [Log.Level] = [.debug,.info,.network,.error,.fault]
 }
 
 
 public struct Log {
-    /// 설정한 레벨 만 보임 : logLevel에 설정한 Level만 보임
-    enum LevelValue : Int{
-        case debug
-        case custom
-        case info
-        case network
-        case error
-        case fault
-    }
+
     /// Log를 보여줄 코드적인 레벨 기본값을 다 보여주는 All로 잡음
 
     enum Level {
@@ -45,23 +37,31 @@ public struct Log {
         case network
         case error
         case fault
-        case custom(category: String)
+        
+        /// 설정한 레벨 만 보임 : logLevel에 설정한 Level만 보임
+        public var name: String {
+            switch self {
+            case .debug:   return "Debug"
+            case .info:    return "Info"
+            case .network: return "Network"
+            case .error:   return "Error"
+            case .fault:   return "fault"
+            }
+        }
         
 
         fileprivate var category: String {
             switch self {
             case .debug:
-                return "[🟡Debug]"
+                return "🔵"
             case .info:
-                return "[🟠Info]"
+                return "⚪️"
             case .network:
-                return "[🔵Network]"
+                return "🟢"
             case .error:
-                return "[🔴Error]"
+                return "🔴"
             case .fault:
-                return "[🔴Fault]"
-            case .custom(let category):
-                return "⚪️\(category)"
+                return "🔴"
             }
         }
 
@@ -77,8 +77,6 @@ public struct Log {
                 return OSLog.error
             case .fault:
                 return OSLog.fault
-            case .custom:
-                return OSLog.debug
             }
         }
 
@@ -94,22 +92,26 @@ public struct Log {
                 return .error
             case .fault:
                 return .fault
-            case .custom:
-                return .debug
             }
         }
     }
 
     
-    static private func log(_ message: Any, _ arguments: [Any], level: Level) {
+    static private func log(_ message: Any,
+                            _ arguments: [Any],
+                            _ file: String = #fileID,
+                            _ function: String = #function,
+                            _ line: UInt = #line,
+                            level: Level) {
         #if DEBUG
         if #available(iOS 14.0, *) {
-            let extraMessage: String = arguments.map({ String(describing: $0) }).joined(separator: " ")
-            let logger = Logger(subsystem: OSLog.subsystem, category: level.category)
-            let logMessage = "\(message) \(extraMessage)"
+            let logger = Logger(subsystem: OSLog.subsystem, category: level.name)
+            let objects: String = arguments.map({ String(describing: $0) }).joined(separator: " ")
+            let fileName = (file.split(separator:"/").last ?? "").split(separator: ".").first ?? ""
+            let prefix = "\(fileName) \(function) (\(line))"
+            let logMessage = "[\(level.category) \(prefix)]: \(message) \(objects)"
             switch level {
-            case .debug,
-                 .custom:
+            case .debug:
                 logger.debug("\(logMessage, privacy: .public)")
             case .info:
                 logger.info("\(logMessage, privacy: .public)")
@@ -129,35 +131,59 @@ public struct Log {
 }
 
 extension Log {
-    public static func debug(_ message: Any, _ arguments: Any...) {
+    public static func debug(_ message: Any,
+                             _ arguments: Any...,
+                             endArgument end: String = "",
+                             _ file: String = #file,
+                             _ function: String = #function,
+                             _ line: UInt = #line
+                            ) {
         guard LLog.shared.logLevel.contains(.debug) else { return }
-        log(message, arguments, level: .debug)
+        log(message, arguments, file, function, line, level: .debug)
     }
 
-    public static func info(_ message: Any, _ arguments: Any...) {
+    public static func info(_ message: Any,
+                            _ arguments: Any...,
+                            endArgument end: String = "",
+                            _ file: String = #file,
+                            _ function: String = #function,
+                            _ line: UInt = #line
+                           ) {
         guard LLog.shared.logLevel.contains(.info) else { return }
-        log(message, arguments, level: .info)
+        log(message, arguments, file, function, line, level: .info)
     }
 
-    public static func network(_ message: Any, _ arguments: Any...) {
+    public static func network(_ message: Any,
+                               _ arguments: Any...,
+                               endArgument end: String = "",
+                               _ file: String = #file,
+                               _ function: String = #function,
+                               _ line: UInt = #line
+                              ) {
         guard LLog.shared.logLevel.contains(.network) else { return }
-        log(message, arguments, level: .network)
+        log(message, arguments, file, function, line, level: .network)
     }
 
-    public static func error(_ message: Any, _ arguments: Any...) {
+    public static func error(_ message: Any,
+                             _ arguments: Any...,
+                             endArgument end: String = "",
+                             _ file: String = #file,
+                             _ function: String = #function,
+                             _ line: UInt = #line
+                            ) {
         guard LLog.shared.logLevel.contains(.error) else { return }
-        log(message, arguments, level: .error)
+        log(message, arguments, file, function, line, level: .error)
     }
-    public static func fault(_ message: Any, _ arguments: Any...) {
+    public static func fault(_ message: Any,
+                             _ arguments: Any...,
+                             endArgument end: String = "",
+                             _ file: String = #file,
+                             _ function: String = #function,
+                             _ line: UInt = #line
+                            ) {
         guard LLog.shared.logLevel.contains(.fault) else { return }
-        log(message, arguments,level: .fault)
+        log(message, arguments, file, function, line, level: .fault)
     }
-
-    public static func custom(category: String, _ message: Any, _ arguments: Any...) {
-        guard LLog.shared.logLevel.contains(.custom) else { return }
-        log(message, arguments, level: .custom(category: category))
-    }
-    
 }
 
 
