@@ -25,7 +25,7 @@ open class LLog {
 
     public static let `shared` = LLog()
     /// Log를 보여줄 코드적인 레벨 기본값을 다 보여주는 All로 잡음
-    var logLevel: [Log.Level] = [.debug,.info,.network,.error,.fault]
+    internal var logLevel: [Log.Level] = [.debug,.info,.network,.error,.fault]
 }
 
 
