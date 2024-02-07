@@ -4,9 +4,7 @@ import OSLog
 import os.log
 /**
 로그를 선택적으로 보여 주기 위해서 Level 을 적용해서 어떤 Level만 보일지를 설정해 줄 수 있습니다.
- 다만 싱글턴을 하나 갖어야 한다는 점 떄문에 사용되지 안을것 같네요....
- 기본 시스템 로그만 가져 갈지는 실무에서 써보면서 결정하겠습니다.
- **/
+**/
 
 extension OSLog {
     static let subsystem = Bundle.main.bundleIdentifier!
@@ -17,10 +15,9 @@ extension OSLog {
     static let fault = OSLog(subsystem: subsystem, category: "Fault")
 }
 
-///  Display Level을 설정하기 위해서 어쩔수 없이 만든 부분인데
-///  어쩌면 계륵 같아서 안 쓰게 될것 같습니다.
+///  Display Level을 설정하기 위해서 사용됩니다.
 ///   시스템의 설정 뿐아니라 로그의 레벨을 직접 적용하는게 목적이여서 진행해 봤습니다.
-///   기본 값을 다 설정하도록 만들겠습니다.
+///   기본 값 - All
 open class LLog {
 
     public static let `shared` = LLog()
