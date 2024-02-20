@@ -7,24 +7,18 @@ let package = Package(
     name: "LevelOSLog",
     platforms: [
         .iOS(.v13)
-    ],
-    products: [
+    ], products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "LevelOSLog",
             targets: ["LevelOSLog"]),
-    ],
-    targets: [
+    ], targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .plugin(
-            name: "MyBuildToolPlugin",
-            capability: .buildTool()
-        ),
         .target(
             name: "LevelOSLog"),
         .testTarget(
             name: "LevelOSLogTests",
             dependencies: ["LevelOSLog"]),
-    ]
+    ], swiftLanguageVersions: [.v5]
 )
