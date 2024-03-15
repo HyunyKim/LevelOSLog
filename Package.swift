@@ -6,7 +6,9 @@ import PackageDescription
 let package = Package(
     name: "LevelOSLog",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13),
+        .watchOS(.v7),
+        .macOS(.v11)
     ], products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
